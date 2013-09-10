@@ -13,7 +13,7 @@ class Service::Databox < Service::Base
 
   def receive_verification(config, _)
     url               = "#{config[:push_url]}/logs"
-    http.ssl[:verify] = false
+    http.ssl[:verify] = true
     http.basic_auth config[:push_token], ''
 
     resp = http_get url
@@ -30,7 +30,7 @@ class Service::Databox < Service::Base
 
   # Push data to Databox
   def receive_issue_impact_change(config, payload)
-    http.ssl[:verify] = false
+    http.ssl[:verify] = true
     http.basic_auth config[:push_token], ''
 
     post_body = {
